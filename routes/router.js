@@ -47,13 +47,11 @@ router.post("/register", async (req, res) => {
 
     } catch (error) {
         res.status(422).json(error);
-        // console.log("catch block error");
     }
 
 });
 
 router.put('/update', async (req, res) => {
-    console.log(req.body)
     try {
         const user = {
             fname: req.body.fname,
@@ -78,8 +76,6 @@ router.put('/update', async (req, res) => {
 
 // user Login
 router.post("/login", async (req, res) => {
-    // console.log(req.body);
-
     const { email, password } = req.body;
 
     if (!email || !password) {
@@ -116,7 +112,6 @@ router.post("/login", async (req, res) => {
 
     } catch (error) {
         res.status(401).json(error);
-        console.log("catch block");
     }
 });
 
@@ -126,9 +121,8 @@ router.post("/login", async (req, res) => {
 router.get("/validuser", authenticate, async (req, res) => {
     try {
         const ValidUserOne = await userdb.findOne({ _id: req.userId });
-        const userName= ValidUserOne.email
+        const userName = ValidUserOne.email
         res.status(201).json({ status: 201, ValidUserOne, userName });
-        // res.send({ status: 201, ValidUserOne })
     } catch (error) {
         res.status(401).json({ status: 401, error });
     }
@@ -155,17 +149,6 @@ router.get("/logout", authenticate, async (req, res) => {
 
 
 module.exports = router;
-
-
-
-// 2 way connection
-// 12345 ---> e#@$hagsjd
-// e#@$hagsjd -->  12345
-
-// hashing compare
-// 1 way connection
-// 1234 ->> e#@$hagsjd
-// 1234->> (e#@$hagsjd,e#@$hagsjd)=> true
 
 
 

@@ -4,16 +4,16 @@ const keysecret = process.env.SECRET_KEY
 
 
 
-const authenticate = async(req,res,next)=>{
+const authenticate = async (req, res, next) => {
 
     try {
         const token = req.headers.authorization;
-        
-        const verifytoken = jwt.verify(token,keysecret);
-        
-        const rootUser = await userdb.findOne({_id:verifytoken._id});
-        
-        if(!rootUser) {throw new Error("user not found")}
+
+        const verifytoken = jwt.verify(token, keysecret);
+
+        const rootUser = await userdb.findOne({ _id: verifytoken._id });
+
+        if (!rootUser) { throw new Error("user not found") }
 
         req.token = token
         req.rootUser = rootUser
@@ -22,9 +22,9 @@ const authenticate = async(req,res,next)=>{
         next();
 
     } catch (error) {
-        res.status(401).json({status:401,message:"Unauthorized no token provide"})
+        res.status(401).json({ status: 401, message: "Unauthorized no token provide" })
     }
 }
 
 
-module.exports = authenticate
+module.exports = authenticate;
