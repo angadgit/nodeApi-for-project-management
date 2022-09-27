@@ -47,7 +47,7 @@ router.post("/register", async (req, res) => {
 
     } catch (error) {
         res.status(422).json(error);
-        console.log("catch block error");
+        // console.log("catch block error");
     }
 
 });
@@ -69,7 +69,7 @@ router.put('/update', async (req, res) => {
         );
         res.json(updatedUser);
     } catch (error) {
-        res.json({ message: error });
+        res.status(401).json(error);
     }
 });
 

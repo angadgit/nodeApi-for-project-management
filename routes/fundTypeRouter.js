@@ -7,9 +7,9 @@ fundTypeRouter.post("/fundTypePost", async (req, res) => {
   try {
     const b = new fundTypeModel(req.body)
     await b.save()
-    res.status(200).json({status: 201})
+    res.status(200).json({ status: 201 })
   } catch (error) {
-    res.status(422).json(error);
+    res.status(401).json(error);
   }
 })
 
@@ -19,8 +19,8 @@ fundTypeRouter.get("/fundTypeGet", async (req, res) => {
     const funder = await fundTypeModel.find();
     res.json(funder);
   } catch (error) {
-    res.json({ message: error });
+    res.status(401).json(error);
   }
 })
 
-module.exports =fundTypeRouter;
+module.exports = fundTypeRouter;

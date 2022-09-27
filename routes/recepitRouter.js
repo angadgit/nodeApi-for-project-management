@@ -9,19 +9,17 @@ recepitRouter.get("/recepitGet", async (req, res) => {
     const recepitGet = await RecepitModel.find();
     res.json(recepitGet);
   } catch (error) {
-    res.json({ message: error });
+    res.status(401).json(error);
   }
 })
 
 // for funder user get
 recepitRouter.get("/recepitUserGet/:id", async (req, res) => {
-  // console.log(req.params.id)
   try {
     const recepitOneId = await RecepitModel.findByIdAndUpdate(req.params.id);
     res.json(recepitOneId);
-    // res.status(200).json(recepitOneId);
   } catch (error) {
-    res.json({ message: error });
+    res.status(401).json(error);
   }
 })
 
@@ -35,7 +33,7 @@ recepitRouter.put("/recepitUserUpdate/:id", async (req, res) => {
     );
     res.json(updatedReceipt);
   } catch (error) {
-    res.json({ message: error });
+    res.status(401).json(error);
   }
 })
 
@@ -47,7 +45,7 @@ recepitRouter.post("/recepitPost", async (req, res) => {
     await b.save()
     res.status(200).json({ success: "Success" })
   } catch (error) {
-    res.json({ message: error });
+    res.status(401).json(error);
   }
 })
 
@@ -58,7 +56,7 @@ recepitRouter.delete("/recepitRemove/:id", async (req, res) => {
     const removeFunder = await RecepitModel.findByIdAndDelete(req.params.id);
     res.status(200).json({ status: 201, removeFunder });
   } catch (error) {
-    res.json({ message: error });
+    res.status(401).json(error);
   }
 })
 
