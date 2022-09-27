@@ -14,12 +14,7 @@ const cors = require("cors");
 const cookiParser = require("cookie-parser")
 
 
-const PORT = process.env.PORT || 8009;
-
-
-app.get("/", (req, res) => {
-    res.status(201).json("server created")
-});
+const PORT = process.env.PORT || '8009';
 
 app.use(express.json());
 app.use(cookiParser());
@@ -30,7 +25,8 @@ app.use('/receipt', receiptApi);
 app.use('/companyProfile', companyProfileApi);
 app.use('/fundType', fundTypeApi);
 
+app.get("/", (req, res) => {
+    res.status(201).json("server created")
+});
 
-app.listen(PORT, () => {
-    console.log(`server start at port no : ${PORT}`);
-})
+app.listen(PORT, () => console.log(`server start at port no : ${PORT}`));
